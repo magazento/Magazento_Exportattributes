@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <modules>
+        <Magazento_Exportattribute>
+            <version>1.1.2</version>
+        </Magazento_Exportattribute>
+    </modules>
+    
+    <global>
+        <rewrite>
+            <mage_adminhtml_system_variable>
+                <from><![CDATA[#^/exportattribute/system_variable#]]>
+                </from>
+                <to>/admin/system_variable</to>
+            </mage_adminhtml_system_variable>
+        </rewrite>
+        <models>
+            <exportattribute>
+                <class>Magazento_Exportattribute_Model</class>
+                <resourceModel>exportattribute_mysql4</resourceModel>
+            </exportattribute>
+            <exportattribute_mysql4>
+                <class>Magazento_Exportattribute_Model_Mysql4</class>
+                <entities>
+                    <item>
+                        <table>magazento_exportattribute_item</table>
+                    </item>
+                    <item_related>
+                        <table>magazento_exportattribute_item_related</table>
+                    </item_related>
+                    <item_store>
+                        <table>magazento_exportattribute_item_store</table>
+                    </item_store>
+                </entities>
+            </exportattribute_mysql4>
+        </models>
+        <resources>
+            <exportattribute_setup>
+                <setup>
+                    <module>Magazento_Exportattribute</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </exportattribute_setup>
+            <exportattribute_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </exportattribute_write>
+            <exportattribute_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </exportattribute_read>
+        </resources>
+        <blocks>
+            <exportattribute>
+                <class>Magazento_Exportattribute_Block</class>
+            </exportattribute>
+        </blocks>
+        <helpers>
+            <exportattribute>
+                <class>Magazento_Exportattribute_Helper</class>
+            </exportattribute>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <exportattribute>
+                <use>admin</use>
+                <args>
+                    <module>Magazento_Exportattribute</module>
+                    <frontName>exportattribute</frontName>
+                </args>
+            </exportattribute>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <exportattribute>
+                    <file>magazento_exportattribute.xml</file>
+                </exportattribute>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <exportattribute translate="title">
+                            <title>Attribute Import/Export</title>
+                            <children>
+                                <item translate="title">
+                                    <title>Export</title>
+                                </item>
+                                <item translate="title">
+                                    <title>Import</title>
+                                </item>
+                            </children>
+                            <sort_order>65</sort_order>
+                        </exportattribute>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <exportattribute>
+                                            <title>exportattribute</title>
+                                            <sort_order>101</sort_order>
+                                        </exportattribute>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <menu>
+            <system translate="title" module="exportattribute">
+                <title>System</title>
+                <children>
+                    <exportattribute translate="title" module="exportattribute">
+                        <title>Import/Export Attribute</title>
+                        <sort_order>0</sort_order>
+                        <children>
+                            <item translate="title" module="exportattribute">
+                                <title>Export</title>
+                                <action>exportattribute/admin_item/</action>
+                                <resource>exportattribute/admin/item</resource>
+                            </item>
+                            <import translate="title" module="exportattribute">
+                                <title>Import</title>
+                                <action>exportattribute/admin_import/</action>
+                                <resource>exportattribute/admin/import</resource>
+                            </import>
+                        </children>                        
+                    </exportattribute>
+                </children>
+            </system>
+        </menu>
+    </adminhtml>
+</config>
